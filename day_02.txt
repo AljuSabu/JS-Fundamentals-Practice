@@ -1,0 +1,91 @@
+Lesson A: Functions are first-class citizens
+
+JavaScript treats functions as values.
+
+That means you can:
+- Store a function in a variable.
+- Pass a function as an argument.
+- Return a function from another function.
+- Store functions inside objects and arrays.
+
+Example:
+function sayHello() {
+  console.log("Hello!");
+}
+
+// Store function in a variable
+const greet = sayHello;
+
+// Execute it
+greet();
+
+The first stores a function reference. The second executes the function and stores its return value.
+
+
+
+Lesson B: Callbacks in real applications
+
+const numbers = [1, 2, 3, 4];
+
+numbers.forEach(function (number) {
+  console.log(number);
+});
+
+- The function passed into forEach() is a callback.
+
+Another example:
+
+setTimeout(() => {
+  console.log("Hello after 2 seconds");
+}, 2000);
+
+- the arrow function is also a callback.
+
+
+
+Lesson C: Hoisting and the Temporal Dead Zone
+
+-
+console.log(a);
+var a = 10;     // undefined
+
+-
+console.log(a);
+let a = 10;     // ReferenceError
+
+-
+sayHello();
+function sayHello() {
+  console.log("Hello!");
+}
+    // Hello!
+Because function declarations are hoisted with their function definitions, so they can be called before their declaration in the same scope.
+
+
+
+Lesson D: Execution context
+
+Whenever JavaScript executes code, it works within an execution context.
+
+For now, understand these two types:
+1. Global Execution Context – created when JavaScript starts executing your script.
+2. Function Execution Context – created whenever a function is invoked.
+
+Example:
+
+const name = "Alju";
+
+function greet() {
+  const message = "Hello " + name;
+  console.log(message);
+}
+
+greet();
+
+When this code runs:
+1. Global execution context is created.
+2. Global variables and function declarations are processed.
+3. greet() is invoked.
+4. A new function execution context is created.
+5. The function executes.
+6. The function execution context is removed after completion.

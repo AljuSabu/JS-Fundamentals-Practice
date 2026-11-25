@@ -1,0 +1,107 @@
+1. What will this code output? Explain why.
+
+function first() {
+  console.log("First");
+}
+const second = first;
+second();
+
+Ans.
+
+The output will be First, because second references to the function named first
+
+Tip: 
+const second = first;   // Function reference
+const second = first(); // Function execution
+
+In the second example, first() executes immediately. Since it doesn't return anything, second receives undefined.
+
+
+
+2. Create a function called calculate that accepts three arguments:
+- a
+- b
+- callback
+The function should pass a and b to the callback and return its result.
+
+Then use it to perform:
+- Addition
+- Subtraction
+- Multiplication
+
+Ans.
+
+function calculate(a, b, callback) {
+  return callback(a, b);
+}
+
+function addition(a, b) {
+  return a + b;
+}
+
+function subtraction(a, b) {
+  return a - b;
+}
+
+function multiplication(a, b) {
+  return a * b;
+}
+
+const result1 = calculate(2, 3, addition);
+const result2 = calculate(6, 2, subtraction);
+const result3 = calculate(4, 2, multiplication);
+
+console.log(result1); // 5
+console.log(result2); // 4
+console.log(result3); // 8
+
+
+
+3. Predict the output of each example. Explain your reasoning.
+
+// Example A
+console.log(a);
+var a = 5;
+
+// Example B
+sayHi();
+
+function sayHi() {
+  console.log("Hi");
+}
+
+// Example C
+console.log(b);
+let b = 10;
+
+Ans.
+
+Example A: undefined // var is hoisted and initialized with undefined untill it is declared
+Example B: Hi // the function declaration is hoisted with its function definition
+Example C: ReferenceError // let is hoisted and will be in TDZ untill declaration
+
+
+
+4. Create a function named processUser that accepts a username and a callback.
+
+It should:
+1. Print Processing user: Alju.
+2. Execute the callback.
+3. The callback should print User processing completed!.
+
+Ans.
+
+function processUser(username, callback) {
+  console.log(`Processing user: ${username}`);
+  callback();
+}
+
+function completed() {
+  console.log("User processing completed!"); 
+}
+
+processUser("Alju", completed)
+
+Output:
+Processing user: Alju
+User processing completed!
