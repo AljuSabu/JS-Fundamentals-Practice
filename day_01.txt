@@ -1,0 +1,192 @@
+1. What is the difference between let, const and var?
+
+Ans.
+
+Feature     	                var	    let	    const
+
+Reassignment	                Yes 	Yes	    No
+Redeclaration in same scope     Yes	    No  	No
+Block scoped	                No	    Yes 	Yes
+Hoisted	                        Yes	    Yes 	Yes
+Initialized with undefined	    Yes	    No	    No
+
+
+
+2. What is the output and why?
+
+console.log(a);
+var a = 10;
+
+console.log(b);
+let b = 20;
+
+Ans.
+
+First output: undefined
+Second output: ReferenceError
+
+JavaScript processes declarations before executing the code.
+With var, the declaration is hoisted and initialized with undefined.
+
+Conceptually, the code behaves like this:
+var a;
+console.log(a); // undefined
+a = 10;
+console.log(b); // ReferenceError
+let b = 20;
+
+The let variable exists in the scope but cannot be accessed before its declaration. This period is called the Temporal Dead Zone.
+
+
+
+3. What is the difference between map(), filter() and forEach()?
+
+Ans.
+
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(num => num * 2);
+const evenNumbers = numbers.filter(num => num % 2 === 0);
+const result = numbers.forEach(num => {
+  console.log(num);
+});
+
+console.log(doubled);     // [2, 4, 6, 8, 10]
+console.log(evenNumbers); // [2, 4]
+console.log(result);      // undefined
+
+map() and filter() return new arrays, whereas forEach() returns undefined.
+
+Also, map() isn't specifically for applying conditions. It's for transforming each element. filter() selects elements based on a condition.
+
+
+
+4. What is the output?
+
+const user = { name: 'Alju' };
+const anotherUser = user;
+anotherUser.name = 'Alex';
+
+console.log(user.name);
+
+Ans.
+
+Alex
+Both variables refer to the same object.
+If you directly mutate an object in React, you can run into rendering problems.
+
+
+
+5. What is the difference between == and ===?
+
+Ans.
+
+console.log(5 == "5");  // true
+console.log(5 === "5"); // false
+
+- == allows type coercion.
+- === compares without type coercion.
+In normal JavaScript application development, prefer === unless you have a specific reason to use loose equality.
+
+
+
+6. What is a callback function?
+
+Ans.
+
+A callback is a function passed as an argument to another function, so that the receiving function can execute it.
+
+function greet(name, callback) {
+  console.log("Hello " + name);
+
+  callback();
+}
+
+function sayWelcome() {
+  console.log("Welcome to JavaScript!");
+}
+
+greet("Alju", sayWelcome);
+
+Output:
+Hello Alju
+Welcome to JavaScript!
+
+We are passing the sayWelcome function into greet. Inside greet, we execute it
+
+greet("Alju", sayWelcome);   // Passing a function
+greet("Alju", sayWelcome()); // Executing it immediately
+
+These two are not equivalent. Callbacks are used extensively in JavaScript, including event listeners, array methods, timers and asynchronous operations.
+
+
+
+7. What is the difference between synchronous and asynchronous JavaScript?
+
+Ans.
+
+Asynchronous operations allow certain tasks to complete later without blocking the main JavaScript execution thread.
+
+console.log("First");
+
+setTimeout(() => {
+  console.log("Second");
+}, 2000);
+
+console.log("Third");
+
+Output:
+First
+Third
+Second
+
+1. First executes.
+2. The timer is scheduled.
+3. JavaScript continues executing.
+4. Third executes.
+5. Once the timer finishes and the callback can be processed, Second executes.
+
+
+
+8. Have you worked with promises and async/await? Explain what you know.
+
+Ans.
+
+A Promise represents the eventual completion or failure of an asynchronous operation.
+
+It has three states:
+Pending-Operation hasn't completed yet
+Fulfilled-Operation succeeded
+Rejected-Operation failed
+
+const myPromise = new Promise((resolve, reject) => {
+  const success = true;
+
+  if (success) {
+    resolve("Data received!");
+  } else {
+    reject("Something went wrong!");
+  }
+});
+
+myPromise
+  .then(result => console.log(result))
+  .catch(error => console.log(error));
+
+- async/await provides a cleaner way to work with promises.
+
+async function getData() {
+  try {
+    const result = await myPromise;
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+getData();
+
+Remember:
+- async makes a function return a Promise.
+- await waits for a Promise to settle before continuing that async function.
+- try/catch helps handle rejected promises and errors.
+await doesn't block the entire JavaScript application.
